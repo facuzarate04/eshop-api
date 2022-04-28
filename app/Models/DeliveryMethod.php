@@ -5,15 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PaymentMethod extends Model
+class DeliveryMethod extends Model
 {
     use HasFactory;
-    
-    protected $table = 'payment_methods';
+
+    protected $table = 'delivery_methods';
+
+    public function specifications()
+    {
+        return $this->hasMany(DeliveryMethodSpecification::class);
+    }
 
     public function orders()
     {
-        return $this->hasMany(Order::class);
+        return $this->hasManyThrough(Order::class, DeliveryMethodSpecification::class);
     }
 
     public function image()
@@ -27,4 +32,8 @@ class PaymentMethod extends Model
         $q->where('active',1);
     }
 
+    public function scopeByCode($q, $code)
+    {
+        return $q->where('code', $code);
+    }
 }

@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class OrderStatus extends Model
+class StatusOrder extends Model
 {
     use HasFactory;
 
-    protected $table = 'order_status';
+    protected $table = 'status_orders';
 
     public function orders()
     {

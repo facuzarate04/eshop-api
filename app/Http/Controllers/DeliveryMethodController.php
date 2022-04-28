@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StorePaymentMethodRequest;
-use App\Http\Requests\UpdatePaymentMethodRequest;
-use App\Http\Resources\PaymentMethodResource;
-use App\Models\PaymentMethod;
+use App\Http\Requests\StoreDeliveryMethodRequest;
+use App\Http\Requests\UpdateDeliveryMethodRequest;
+use App\Http\Resources\DeliveryMethodResource;
+use App\Models\DeliveryMethod;
 use Illuminate\Routing\Controller;
 
-class PaymentMethodController extends Controller
+class DeliveryMethodController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,8 +18,8 @@ class PaymentMethodController extends Controller
     public function index()
     {
         try {
-            $paymentMethods = PaymentMethod::with('image')->active()->get();
-            $response = PaymentMethodResource::collection($paymentMethods);
+            $deliveryMethods = DeliveryMethod::active()->get();
+            $response = DeliveryMethodResource::collection($deliveryMethods);
             return response()->json($response,200);
         } catch (\Throwable $th) {
             //throw $th;
@@ -39,10 +39,10 @@ class PaymentMethodController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StorePaymentMethodRequest  $request
+     * @param  \App\Http\Requests\StoreDeliveryMethodRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StorePaymentMethodRequest $request)
+    public function store(StoreDeliveryMethodRequest $request)
     {
         //
     }
@@ -50,10 +50,10 @@ class PaymentMethodController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\PaymentMethod  $paymentMethod
+     * @param  \App\Models\DeliveryMethod  $deliveryMethod
      * @return \Illuminate\Http\Response
      */
-    public function show(PaymentMethod $paymentMethod)
+    public function show(DeliveryMethod $deliveryMethod)
     {
         //
     }
@@ -61,10 +61,10 @@ class PaymentMethodController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\PaymentMethod  $paymentMethod
+     * @param  \App\Models\DeliveryMethod  $deliveryMethod
      * @return \Illuminate\Http\Response
      */
-    public function edit(PaymentMethod $paymentMethod)
+    public function edit(DeliveryMethod $deliveryMethod)
     {
         //
     }
@@ -72,11 +72,11 @@ class PaymentMethodController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdatePaymentMethodRequest  $request
-     * @param  \App\Models\PaymentMethod  $paymentMethod
+     * @param  \App\Http\Requests\UpdateDeliveryMethodRequest  $request
+     * @param  \App\Models\DeliveryMethod  $deliveryMethod
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatePaymentMethodRequest $request, PaymentMethod $paymentMethod)
+    public function update(UpdateDeliveryMethodRequest $request, DeliveryMethod $deliveryMethod)
     {
         //
     }
@@ -84,10 +84,10 @@ class PaymentMethodController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\PaymentMethod  $paymentMethod
+     * @param  \App\Models\DeliveryMethod  $deliveryMethod
      * @return \Illuminate\Http\Response
      */
-    public function destroy(PaymentMethod $paymentMethod)
+    public function destroy(DeliveryMethod $deliveryMethod)
     {
         //
     }

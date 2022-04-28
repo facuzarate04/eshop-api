@@ -13,13 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('images', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-            $table->morphs('imageable');
-            $table->string('small_webp_url');
-            $table->string('medium_webp_url')->nullable();
-            $table->string('large_webp_url')->nullable();
+        Schema::table('orders', function (Blueprint $table) {
+            $table->unsignedBigInteger('delivery_method_specification_id');
+            $table->foreign('delivery_method_specification_id')->references('id')->on('delivery_method_specifications');
         });
     }
 
@@ -30,6 +26,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('images');
+        Schema::table('orders', function (Blueprint $table) {
+            $table->dropColumn('delivery_method_specification_id');
+        });
     }
 };

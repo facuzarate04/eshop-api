@@ -13,12 +13,17 @@ class Order extends Model
 
     public function status()
     {
-        return $this->belongsTo(OrderStatus::class);
+        return $this->belongsTo(StatusOrder::class);
     }
 
     public function paymentMethod()
     {
         return $this->belongsTo(PaymentMethod::class);
+    }
+
+    public function deliveryMethodSpecification()
+    {
+        return $this->belongsTo(DeliveryMethodSpecification::class);
     }
 
     public function products()

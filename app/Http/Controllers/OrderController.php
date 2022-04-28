@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
 use App\Models\Order;
+use App\Services\OrderService;
 use Illuminate\Routing\Controller;
 
 class OrderController extends Controller
@@ -38,7 +39,10 @@ class OrderController extends Controller
     public function store(StoreOrderRequest $request, OrderService $orderService)
     {
         try {
-            $response = $orderService->store();
+            $data = $request->validated();
+            return response()->json('Hello',200);
+            $response = $orderService->store(data: $data);
+            return response()->json($response, 200);
         } catch (\Throwable $th) {
             //throw $th;
         }

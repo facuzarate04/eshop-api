@@ -17,7 +17,8 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('name')->unique();
-            $table->integer('code')->unique();
+            $table->string('code')->unique()->nullable();
+            $table->boolean('active')->default(1);
         });
     }
 

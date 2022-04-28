@@ -19,6 +19,9 @@ class CategoryController extends Controller
     {
         try {
             $categories = Category::with('subCategories')
+                ->whereHas('subCategories', function($q){
+                    $q->has('products');
+                })
                 ->take(10)
                 ->get();
             $response = CategoryResource::collection($categories);

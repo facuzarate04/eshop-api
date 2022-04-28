@@ -13,13 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('images', function (Blueprint $table) {
+        Schema::create('status_orders', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->morphs('imageable');
-            $table->string('small_webp_url');
-            $table->string('medium_webp_url')->nullable();
-            $table->string('large_webp_url')->nullable();
+            $table->string('name')->unique();
+            $table->string('code')->unique()->nullable();
+            $table->string('reason');
         });
     }
 
@@ -30,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('images');
+        Schema::dropIfExists('status_order');
     }
 };
