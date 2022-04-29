@@ -13,9 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('orders', function (Blueprint $table) {
-            $table->unsignedBigInteger('delivery_method_specification_id')->nullable();
-            $table->foreign('delivery_method_specification_id')->references('id')->on('delivery_method_specifications');
+        Schema::table('users', function (Blueprint $table) {
+            $table->boolean('is_owner')->default(0);
         });
     }
 
@@ -26,8 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('orders', function (Blueprint $table) {
-            $table->dropColumn('delivery_method_specification_id');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('is_owner');
         });
     }
 };

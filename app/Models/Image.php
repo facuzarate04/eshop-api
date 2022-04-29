@@ -36,7 +36,7 @@ class Image extends Model
 
     public function getpreviewImageAttribute()
     {
-        return asset($this->medium_webp_url);
+        return asset($this->small_webp_url);
     }
     
 }

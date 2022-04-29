@@ -16,7 +16,8 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->decimal('price_paid',6,4);
+            $table->uuid('number');
+            $table->decimal('price_paid',10,2)->nullable()->default(null);
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('payment_method_id');
             $table->unsignedBigInteger('status_order_id');

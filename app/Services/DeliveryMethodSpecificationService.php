@@ -8,24 +8,23 @@ use App\Models\Order;
 use App\Models\StateCity;
 use App\Models\User;
 use App\Models\UserAddress;
+use Illuminate\Support\Facades\Log;
 
 class DeliveryMethodSpecificationService
 {
-    private DeliveryMethodSpecification $deliverySpecification;
 
     public function getDeliverySpecification(User $client, $code)
     {
         $deliveryMethod = DeliveryMethod::byCode(code: $code)->firstOrFail();
         $clientAddress = UserAddress::byUser(user: $client)->firstOrFail();
         $destination = $clientAddress->stateCity;
-        $origin = User::where('is_owner', 1)->address->stateCity;
-        
-        $this->deliverySpecification = DeliveryMethodSpecification::where('delivery_method_id', $deliveryMethod->id)
+        $origin = User::where('is_owner', 1)->first()->address->stateCity;
+        $deliverySpecification = DeliveryMethodSpecification::where('delivery_method_id', $deliveryMethod->id)
             ->where('origin_id', $origin->id)
             ->where('destination_id', $destination->id)
-            ->firstOrFail();
+            ->first();
 
-        return $this->deliverySpecification;
+        return $deliverySpecification ? $deliverySpecification : false;
     }
 
 }

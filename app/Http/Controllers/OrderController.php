@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
+use App\Http\Resources\OrderResource;
 use App\Models\Order;
 use App\Services\OrderService;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
 class OrderController extends Controller
@@ -17,7 +19,21 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        try {
+            $orders = Order::where('user_id', auth()->id())
+                ->with([
+                    'user',
+                    'status',
+                    'paymentMethod',
+                    'deliveryMethodSpecification',
+                    'products'
+                ])
+                ->get();
+            $orders = OrderResource::collection($orders);
+            return response()->json(['orders' => $orders], 200);
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
     }
 
     /**
@@ -40,7 +56,6 @@ class OrderController extends Controller
     {
         try {
             $data = $request->validated();
-            return response()->json('Hello',200);
             $response = $orderService->store(data: $data);
             return response()->json($response, 200);
         } catch (\Throwable $th) {

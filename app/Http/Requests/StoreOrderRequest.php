@@ -27,9 +27,11 @@ class StoreOrderRequest extends FormRequest
     {
         return [
             'price_paid' => 'required]numeric|between:1,999999,99',
+            'delivery_method_code' => 'required|exists:delivery_methods,code',
+            'payment_method_code' => 'required|exists:payment_methods,code',
             'products' => 'required|array',
             'products.*.id' => 'required|exists:products,id',
-            'products.*.quantity' => 'required|lte:stock'
+            'products.*.quantity' => 'required|lte:products.*.stock'
         ];
     }
 
@@ -39,6 +41,6 @@ class StoreOrderRequest extends FormRequest
             'success'   => false,
             'message'   => 'Validation errors',
             'data'      => $validator->errors()
-        ]));
+        ], 520));
     }
 }

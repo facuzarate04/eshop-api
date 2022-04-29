@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Category;
 use App\Models\DeliveryMethod;
+use App\Models\DeliveryMethodSpecification;
 use App\Models\Image;
 use App\Models\PaymentMethod;
 use App\Models\Product;
@@ -21,19 +22,26 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        User::factory(10)->create();
+        
         Category::factory(5)->has(
                 SubCategory::factory()->has(
                     Product::factory()->has(
-                        Image::factory()->count(2)
+                        Image::factory()->count(1)
                     )->count(2)
                 )->count(2)
             )->create();
 
             $this->call([
                 DeliveryMethodSeeder::class,
-                PaymentMethodSeeder::class
+                PaymentMethodSeeder::class,
+                StatusOrderSeeder::class,
             ]);
+
+        DeliveryMethodSpecification::factory(4)->create();
+        User::factory(10)->hasAddress()->create();
+        User::factory()->hasAddress()->create([
+            'is_owner' => 1
+        ]);
 
         
     }

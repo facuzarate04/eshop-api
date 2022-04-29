@@ -35,11 +35,9 @@ class ImageFactory extends Factory
             File::makeDirectory($filepath);
         }
         $small = $this->faker->image($filepath,400,300, null, false);
-        $medium = $this->faker->image($filepath,800,600, null, false);
         $large = $this->faker->image($filepath,1200,800, null, false);
         return [
             'small_webp_url' => 'images/'.$small,
-            'medium_webp_url' => 'images/'.$medium,
             'large_webp_url' => 'images/'.$large,
         ];
     }

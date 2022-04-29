@@ -18,7 +18,7 @@ class UserAddress extends Model
 
     public function stateCity()
     {
-        return $this->belongsTo(StateCity::class, 'state_city_id');
+        return $this->belongsTo(StateCity::class, 'city_id');
     }
 
     //Scopes

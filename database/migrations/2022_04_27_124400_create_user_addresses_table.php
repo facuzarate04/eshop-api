@@ -20,8 +20,8 @@ return new class extends Migration
             $table->unsignedBigInteger('city_id');
             $table->string('street');
             $table->integer('street_number')->nullable()->default(null);
-            $table->integer('flat')->nullable()->default(null);
-            $table->integer('flat_number')->nullable()->default(null);
+            $table->integer('building')->nullable()->default(null);
+            $table->integer('building_number')->nullable()->default(null);
             $table->tinyText('references')->nullable()->default(null);
 
             $table->foreign('user_id')->references('id')->on('users');

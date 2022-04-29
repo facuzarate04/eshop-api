@@ -18,8 +18,12 @@ return new class extends Migration
             $table->timestamps();
             $table->unsignedBigInteger('product_id');
             $table->unsignedBigInteger('order_id');
+            $table->integer('quantity')->default(1);
+            $table->decimal('price_paid', 10,2);
+            
             $table->foreign('product_id')->references('id')->on('products');
             $table->foreign('order_id')->references('id')->on('orders');
+
         });
     }
 

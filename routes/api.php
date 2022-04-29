@@ -3,6 +3,8 @@
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DeliveryMethodController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\Pages\CartCheckoutController;
+use App\Http\Controllers\Pages\LandingProductsController;
 use App\Http\Controllers\PaymentMethodController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SubCategoryController;
@@ -43,7 +45,18 @@ Route::prefix('v1')->middleware([])->group(function () {
     });
 
     Route::prefix('orders')->middleware(['auth:sanctum'])->group(function () {
+        Route::get('/', [OrderController::class,'index']);
         Route::post('/', [OrderController::class,'store']);
+    });
+    
+
+    //Pages Builders
+
+    Route::prefix('landing-products')->middleware(['auth:sanctum'])->group(function () {
+        Route::get('/', [LandingProductsController::class,'index']);
+    });
+    Route::prefix('cart-checkout')->middleware(['auth:sanctum'])->group(function () {
+        Route::get('/', [CartCheckoutController::class,'index']);
     });
 
 });

@@ -11,6 +11,11 @@ class Order extends Model
 
     protected $table = 'orders';
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function status()
     {
         return $this->belongsTo(StatusOrder::class);
@@ -28,7 +33,17 @@ class Order extends Model
 
     public function products()
     {
-        return $this->belongsToMany(Product::class, 'product_order', 'order_id', 'product_id');
+        return $this->belongsToMany(Product::class, 'product_order', 'order_id', 'product_id')->withPivot(['quantity','price_paid'])->orderByPivot('quantity','asc');
+    }
+
+    public function calculatePricePaid() : float
+    {
+        $pricePaid = 0;
+        foreach($this->products as $product)
+        {
+            $pricePaid = $pricePaid + ($product->price * $product->pivot->quantity);
+        }
+        return $pricePaid;
     }
 
 
