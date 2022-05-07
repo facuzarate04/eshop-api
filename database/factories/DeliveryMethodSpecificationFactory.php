@@ -23,7 +23,7 @@ class DeliveryMethodSpecificationFactory extends Factory
             'origin_id' => StateCity::factory(),
             'destination_id' => StateCity::factory(),
             'price' => $this->faker->randomFloat(2, 0, 1000),
-            'arrival_date' => $this->faker->dateTime('2030-12-25 08:37:17', 'UTC')
+            'delay_time' => rand(0,7)
         ];
     }
 }

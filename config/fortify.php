@@ -138,6 +138,8 @@ return [
             'confirm' => true,
             'confirmPassword' => true,
         ]), */
+        Features::updateProfileInformation(),
+        Features::updatePasswords(),
         Features::registration(),
         Features::resetPasswords(),
         Features::emailVerification(),

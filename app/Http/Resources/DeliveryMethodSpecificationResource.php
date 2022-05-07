@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class DeliveryMethodResource extends JsonResource
+class DeliveryMethodSpecificationResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,11 +16,11 @@ class DeliveryMethodResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'name' => $this->name,
-            'code' => $this->code,
             'price' => $this->price,
-            'orders' => OrderResource::collection($this->whenLoaded('orders')),
-            'specifications' => DeliveryMethodSpecificationResource::collection($this->whenLoaded('specifications'))
+            'delay_time' => $this->delay_time,
+            'deliveryMethod' => DeliveryMethodResource::make($this->whenLoaded('deliveryMethod')),
+            'origin' => $this->whenLoaded('origin'),
+            'destination' => $this->whenLoaded('destination')
         ];
     }
 }

@@ -18,7 +18,7 @@ class Order extends Model
 
     public function status()
     {
-        return $this->belongsTo(StatusOrder::class);
+        return $this->belongsTo(StatusOrder::class, 'status_order_id');
     }
 
     public function paymentMethod()
@@ -28,7 +28,7 @@ class Order extends Model
 
     public function deliveryMethodSpecification()
     {
-        return $this->belongsTo(DeliveryMethodSpecification::class);
+        return $this->belongsTo(DeliveryMethodSpecification::class, 'delivery_method_specification_id');
     }
 
     public function products()

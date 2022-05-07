@@ -16,6 +16,16 @@ class DeliveryMethodSpecification extends Model
         return $this->belongsTo(DeliveryMethod::class, 'delivery_method_id');
     }
 
+    public function origin()
+    {
+        return $this->belongsTo(StateCity::class, 'origin_id');
+    }
+
+    public function destination()
+    {
+        return $this->belongsTo(StateCity::class, 'destination_id');
+    }
+
     public function orders()
     {
         return $this->hasMany(Order::class);

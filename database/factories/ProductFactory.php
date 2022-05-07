@@ -22,8 +22,8 @@ class ProductFactory extends Factory
         return [
             'name' => $this->faker->unique()->name(),
             'status' => $this->faker->randomElement($status),
-            'price' => $this->faker->randomFloat(2, 20, 99999),
-            'stock' => $this->faker->numberBetween($min = 0, $max = 9999),
+            'price' => $this->faker->randomFloat(2, 20, 10000),
+            'stock' => $this->faker->numberBetween($min = 0, $max = 100),
             'description' => $this->faker->text(120),
             'sub_category_id' => SubCategory::factory()
         ];

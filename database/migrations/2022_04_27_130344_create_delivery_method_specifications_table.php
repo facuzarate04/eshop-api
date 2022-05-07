@@ -21,7 +21,7 @@ return new class extends Migration
             $table->unsignedBigInteger('origin_id');
             $table->unsignedBigInteger('destination_id');
             $table->decimal('price');
-            $table->dateTime('arrival_date')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->integer('delay_time')->default(0);
 
             $table->foreign('delivery_method_id')->references('id')->on('delivery_methods');
             $table->foreign('origin_id')->references('id')->on('state_cities');
